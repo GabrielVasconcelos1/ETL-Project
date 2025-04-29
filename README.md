@@ -14,7 +14,7 @@ algumas pastas não foram colocadas dentro do repositório afim de não pesar o 
 Contém os arquivos originais do tipo .xlsx que serão processados, e transformados pelo programa main.py
 
 ##### 1.2 Pasta - src/data/ready: 
-Será o destino dos arquivos processados e transformados, que estaram em um arquivo de nome Clean.
+Será o destino dos arquivos processados e transformados, que estarão em um arquivo de nome Clean.
 
 ##### 1.3 Pasta - Venv
 pasta criada para criar um espaço virtual dedicado ao projeto.

@@ -5,6 +5,8 @@
 
 Este projeto é uma aplicação prática de ETL (Extract, Transform, Load), desenvolvido com o objetivo de consolidar conhecimentos sobre, extração, manipulação de dados usando Python.
 algumas pastas não foram colocadas dentro do repositório afim de não pesar o arquivo, porém todos foram criados.
+
+![Pastas do projeto](src/Pastas.png)
   
 ## Estrutura do Projeto
 #### 1. Pastas:

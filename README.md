@@ -1,85 +1,70 @@
+## 📊Projeto de ETL com Python
+Este projeto é uma aplicação prática de ETL (Extract, Transform, Load), desenvolvida para consolidar conhecimentos em extração e transformação de dados utilizando Python e suas bibliotecas nativas e de terceiros. A proposta é processar dados brutos em arquivos .xlsx, realizar transformações relevantes e gerar um dataset limpo e pronto para análise.
 
-  
+## 📁 Estrutura do Projeto
 
-# Projeto de Estudo de ETL
-
-Este projeto é uma aplicação prática de ETL (Extract, Transform, Load), desenvolvido com o objetivo de consolidar conhecimentos sobre, extração, manipulação de dados usando Python.
-algumas pastas não foram colocadas dentro do repositório afim de não pesar o arquivo, porém todos foram criados.
-
+```bash
+	src/
+	├── data/
+	│   ├── raw/       # Contém os arquivos brutos (.xlsx)
+	│   └── ready/     # Destino dos arquivos processados (clean.xlsx)
+	├── main.py        # Script principal de ETL
+	venv/              # Ambiente virtual do projeto
+	doc/               # Documentos e anotações relevantes
+```
 ![Pastas do projeto](src/Pastas.png)
-  
-## Estrutura do Projeto
-#### 1. Pastas:
-##### 1.1 Pasta  - src/data/raw: 
-Contém os arquivos originais do tipo .xlsx que serão processados, e transformados pelo programa main.py
 
-##### 1.2 Pasta - src/data/ready: 
-Será o destino dos arquivos processados e transformados, que estarão em um arquivo de nome Clean.
+## ⚙️ Tecnologias e Ferramentas
+- Python 3.13.0 — Linguagem principal.
+- Pandas — Manipulação de dados tabulares.
+- XlsxWriter — Escrita de arquivos Excel.
+- os — Manipulação de diretórios e caminhos de sistema.
+- glob — Leitura em lote de arquivos.
 
-##### 1.3 Pasta - Venv
-pasta criada para criar um espaço virtual dedicado ao projeto.
+## 🚀 Funcionalidades
+### 📥 Extração de Dados
+- Identifica e carrega automaticamente todos os arquivos .xlsx na pasta src/data/raw.
 
-##### 1.4 Pasta - Doc
-pasta criada para colocar arquivos de documentos importantes para o programa.
-#### 2. Tecnologias Utilizadas
+### 🔄 Transformação de Dados
+- Adição de coluna location: Baseada no nome do arquivo, define a origem dos dados:
+	- 'br' para arquivos que contêm "brasil"
+	- 'fr' para arquivos que contêm "france"
+	- 'it' para arquivos que contêm "italian"
+- Extração da campanha (campaign): Utiliza regex para extrair o valor do parâmetro utm_campaign da coluna utm_link.
 
-- Python: Linguagem de programação principal do projeto.
+### 📤 Carregamento dos Dados
+- Consolida todos os DataFrames em um único arquivo clean.xlsx, salvo na pasta src/data/ready.
 
-#### 3.Bibliotecas, extensões e módulos :
+### ⚠️ Tratamento de Erros
+- Exibe mensagens de erros ao falhar na leitura de arquivos, garantindo que os demais sejam processados.
 
-- pandas: Manipulação e transformação de dados tabulares. (Biblioteca)
-- Xlsxwriter: Escrita de arquivos Excel. (Biblioteca)
-- os: Gerenciamento de diretórios(acessos ) e manipulação de arquivos. (Módulo do Python)
-- glob: Identificação e seleção de arquivos em massa no diretorio.(Módulo do Python)
-
-
-  
-#### 4. Funcionalidades.
-
-##### 4.1 Extração de Dados.
-Identifica todos os arquivos Excel na pasta src/data/raw.
-##### 4.2 Lê os arquivos encontrados.
-
-##### 4.3 Transformação de Dados.
-###### 4.3.1 Criação de uma coluna location.
-Tendo como base o nome do arquivo, afim de garantir rastreabilidade e confiabilidade dos dados foi criado no arquivo novo uma coluna location para que possamos rastrear e saber de onde vem os dados.
-Exemplos: 
- - 'br' para arquivos que vieram da base de dados "brasil"
- - 'fr' para arquivos que vieram da base de dados "france" 
- - 'it' para arquivos que vieram da base de dados "italian".
-###### 4.3.2Criação de uma coluna campaign .
-Afim de conseguir melhor visualização dos dados e poder ter melhor aproveitamento das informações ao importar esses dados para criação de um relatório, extraindo informações da coluna utm_link através da expressão.
-```python
-	 df_Temp['campaign'] = df_Temp['utm_link'].str.extract(r'utm_campaign=(.*)')
+## ▶️ Como Executar
+#### 1º Clone este repositório:
+```bash
+	git clone https://github.com/seu-usuario/seu-repositorio.git
+	cd seu-repositorio
+```
+#### 2º Crie um ambiente virtual
+```bash
+	python -m venv venv
+	source venv/bin/activate  # ou venv\Scripts\activate no Windows
 ```
 
-##### 4.4 Carregamento de Dados.
-Consolida todos os arquivos Excel em um único DataFrame, após isso o código salva o resultado transformado em um arquivo Excel chamado clean.xlsx na pasta src/data/ready.
+#### 3º Instale as dependências:
 
-##### 4.5 Tratamento de Erros.
-Mensagem exibida caso nenhum arquivo Excel seja encontrado por meio do código.
-fazendo assim o tratamento de exceções ao ler arquivos, garantindo que  o processamento continue para os demais arquivos. 
-```python
-	 except Exception as e:
-
-            print(f"Erro ao ler o arquivo {excel_file}: {e}")
+```bash
+	pip install pandas
+	pip install xlsxwriter
+	
 ```
+#### 4º Adicione seus arquivos .xlsx à pasta src/data/raw.
+#### 5º Execute o script principal:
+```bash
+	python src/main.py
+```
+#### 6º O arquivo clean.xlsx será gerado em src/data/ready.
 
+## 🎯 Objetivo do Projeto
+Este projeto tem como objetivo fixar o entendimento prático dos conceitos de ETL com Python, estruturando um pipeline simples, mas funcional, para manipulação e limpeza de dados. Foi desenvolvido como parte de um estudo pessoal de boas práticas para Extração, tratamento, limpeza de dados e .
 
-  
-
-### Como Executar
-
-1. Certifique-se de ter Python e as bibliotecas necessárias instaladas.
-2. Importe os arquivos .xlsx na pasta src/data/raw.
-3. Execute o script Python.
-4. O arquivo resultante estará na pasta src/data/ready com o nome clean.xlsx.
-
-
-  
-
-### Propósito
-
-Este projeto foi desenvolvido como parte de um estudo pessoal para entender e implementar os princípios de ETL utilizando Python, assim como garantir aprendizado quanto as boas práticas da criação de um projeto.
-
-A base de dados RAW utilizadas são meramente fictícias e adquiridas por meio de repositório publico no GitHub 
+# Nota: As bases de dados utilizadas são fictícias e de uso livre, coletadas em repositórios públicos.
